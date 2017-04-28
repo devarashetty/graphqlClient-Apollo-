@@ -16,6 +16,9 @@ import Html from './routes/Html';
 import createApolloClient from './helpers/create-apollo-client';
 import getNetworkInterface from './transport';
 
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+
 let PORT = 4000;
 if (process.env.PORT) {
   PORT = parseInt(process.env.PORT, 10);

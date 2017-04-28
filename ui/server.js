@@ -28,8 +28,6 @@ const app = new Express();
 const apiProxy = proxy({ target: API_HOST, changeOrigin: true });
 app.use('/graphql', apiProxy);
 app.use('/graphiql', apiProxy);
-app.use('/login', apiProxy);
-app.use('/logout', apiProxy);
 
 if (process.env.NODE_ENV === 'production') {
   // In production we want to serve our JavaScripts from a file on the file

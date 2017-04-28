@@ -9,11 +9,14 @@ import path from 'path';
 import proxy from 'http-proxy-middleware';
 
 import routes from './routes';
+
+console.log("routes",routes);
+
 import Html from './routes/Html';
 import createApolloClient from './helpers/create-apollo-client';
 import getNetworkInterface from './transport';
 
-let PORT = 3000;
+let PORT = 4000;
 if (process.env.PORT) {
   PORT = parseInt(process.env.PORT, 10);
 }
@@ -39,6 +42,7 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use((req, res) => {
   match({ routes, location: req.originalUrl }, (error, redirectLocation, renderProps) => {
+    console.log("----------error, redirectLocation, renderProps",error, redirectLocation, renderProps)
     if (redirectLocation) {
       res.redirect(redirectLocation.pathname + redirectLocation.search);
     } else if (error) {
@@ -71,6 +75,7 @@ app.use((req, res) => {
         res.status(500);
         res.end(`An error occurred. Please submit an issue to [https://github.com/apollographql/GitHunt-React] with the following stack trace:\n\n${e.stack}`);
       });
+
     } else {
       res.status(404).send('Not found');
     }
